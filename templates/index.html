@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#f7f8fc">
+    <title>A1 Job Description Analyzer</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="/static/script.js" defer></script>
+</head>
+<body>
+    <header class="topbar">
+        <a href="/" class="brand">
+            <span class="brand-icon">A1</span>
+            <span>Hire<span class="brand-accent">Sense</span></span>
+        </a>
+        <span class="header-label">AI Hiring Assistant</span>
+    </header>
+
+    <main class="container">
+        <section class="hero">
+            <div class="eyebrow">
+                <span class="status-dot"></span>
+                LANGGRAPH · GROQ AI
+            </div>
+            <h1>Understand every<br><span>job description.</span></h1>
+            <p class="hero-text">
+                Turn any job description into a structured hiring report
+                with skills, experience, job category and more.
+            </p>
+        </section>
+
+        <section class="input-card">
+            <div class="section-heading">
+                <div>
+                    <span class="step-label">STEP 01</span>
+                    <h2>Paste job description</h2>
+                </div>
+                <span class="input-icon">✎</span>
+            </div>
+
+            <label for="jobDescription">Job description</label>
+            <textarea
+                id="jobDescription"
+                maxlength="20000"
+                placeholder="Paste the complete job description here...
+
+Example: We are hiring a Python Developer with experience in FastAPI, SQL and AI..."
+            ></textarea>
+
+            <div class="textarea-footer">
+                <span id="charCount">0 / 20000 characters</span>
+                <button id="sampleBtn" class="text-button" type="button">
+                    Try sample description ↗
+                </button>
+            </div>
+
+            <button id="analyzeBtn" class="primary-button" type="button">
+                <span id="buttonText">Analyze Job Description</span>
+                <span id="buttonArrow">→</span>
+            </button>
+
+            <p class="privacy-note">
+                Your report is generated from the description you provide.
+            </p>
+        </section>
+
+        <div id="errorBox" class="error-box hidden" role="alert"></div>
+
+        <section id="loadingBox" class="loading-box hidden" aria-live="polite">
+            <div class="loader"></div>
+            <h3>Analyzing your job description...</h3>
+            <p id="loadingText">Extracting job information</p>
+            <div class="progress-track"><div class="progress-fill"></div></div>
+        </section>
+
+        <section id="reportSection" class="report-section hidden">
+            <div class="report-header">
+                <div>
+                    <span class="step-label">STEP 02 · ANALYSIS COMPLETE</span>
+                    <h2>Your hiring report</h2>
+                    <p>Review the extracted information and skills below.</p>
+                </div>
+                <button id="downloadBtn" class="secondary-button" type="button">
+                    ↓ Export JSON
+                </button>
+            </div>
+
+            <div class="overview-grid">
+                <article class="info-card">
+                    <span class="card-label">JOB TITLE</span>
+                    <h3 id="jobTitle">—</h3>
+                    <p id="companyName">Company not specified</p>
+                </article>
+                <article class="info-card">
+                    <span class="card-label">EXPERIENCE</span>
+                    <h3 id="experience">—</h3>
+                    <p>Required experience</p>
+                </article>
+                <article class="info-card">
+                    <span class="card-label">JOB CATEGORY</span>
+                    <h3 id="jobCategory">—</h3>
+                    <p>Professional field</p>
+                </article>
+                <article class="info-card">
+                    <span class="card-label">EMPLOYMENT</span>
+                    <h3 id="employmentType">—</h3>
+                    <p id="workArrangement">Work arrangement not specified</p>
+                </article>
+            </div>
+
+            <article class="report-card">
+                <div class="card-heading">
+                    <div>
+                        <span class="mini-icon">✦</span>
+                        <h3>Required skills</h3>
+                    </div>
+                </div>
+                <div id="requiredSkills" class="tags"></div>
+            </article>
+
+            <div class="skills-grid">
+                <article class="report-card">
+                    <div class="card-heading">
+                        <div>
+                            <span class="mini-icon purple">⌘</span>
+                            <h3>Technical skills</h3>
+                        </div>
+                    </div>
+                    <div id="technicalSkills" class="tags"></div>
+                </article>
+
+                <article class="report-card">
+                    <div class="card-heading">
+                        <div>
+                            <span class="mini-icon orange">♡</span>
+                            <h3>Soft skills</h3>
+                        </div>
+                    </div>
+                    <div id="softSkills" class="tags"></div>
+                </article>
+            </div>
+
+            <article class="report-card priority-card">
+                <div class="card-heading">
+                    <div>
+                        <span class="mini-icon gold">★</span>
+                        <h3>Top 3 most important skills</h3>
+                    </div>
+                </div>
+                <div id="topSkills" class="top-skills"></div>
+            </article>
+
+            <article class="report-card summary-card">
+                <span class="card-label">HIRING SUMMARY</span>
+                <p id="hiringSummary"></p>
+            </article>
+
+            <div class="bottom-action">
+                <button id="newAnalysisBtn" class="secondary-button" type="button">
+                    + Analyze another job
+                </button>
+            </div>
+        </section>
+
+        <footer>
+            <span>HireSense · A1 Job Description Analyzer</span>
+            <span>Powered by LangGraph + Groq</span>
+        </footer>
+    </main>
+</body>
+</html>
